@@ -1,0 +1,21 @@
+This folder contains the basic building blocks to implement an environment that some machine algorithm maybe used to train on.
+
+System.py:
+Contains 3 main classes that are the base of the system: the eye class, the elasic class, and the motor class.
+A combination of these 3 class objects connected in a certain way inside the system class will build up a simulated biomimetic eye.
+This system can be fed a list that has the wanted orientation of the motors, an update method that will update the state of the system, and can return the state of the system.
+
+CustomEnv.py:
+These class that is the base of the environments developed for training. It ahas an object System and uses it to simulate the movements from applying a defined action to it.
+
+Renderer.py:
+A file copied and barely adapted from the gym package which was needed to render the system in a graphics window.
+
+sys_playground.py:
+Running this will let you play with the system.
+W, A, S, D - to move in around horizontally
+Space, LShift - to move up and down respectively
+LCTRL (Held down) - slow down the movements
+E - (un)lock mouse to window
+I - print player position and orientation
+J - print system orientation

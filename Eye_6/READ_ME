@@ -1,0 +1,12 @@
+The very basic build of an eye system similar to Eye_3 but that makes use of 6 motors. The interaction between each motor and an elastic is like a spindle.
+Run sys_playground.py to visualize how the system is setup. The location and size of the motors might need to be updated as well as the force applied to the eye (use the distance between the insertion point and the midpoints instead of using the full length of the elastics)
+
+Packages required:
+* Cython
+* gym
+* keyboard
+* numba
+* numpy
+* numpy-quaternion
+* pyglet
+* scipy

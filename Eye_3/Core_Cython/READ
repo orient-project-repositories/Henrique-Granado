@@ -1,0 +1,4 @@
+Run the following to build the C extensions:
+python setup.py build_ext -if
+
+This folder contains essentially the same thing as Core_pygletless with the slight difference that it makes use of the Cython, a C-extension for Python speeding up the simulations done.

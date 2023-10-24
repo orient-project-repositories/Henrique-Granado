@@ -1,0 +1,78 @@
+Run training.py to train the system using the soft-actor critic algorithm.
+The way it is currently setup with its variables is similar to running the following line:
+python training.py -control_type CythonOpenLoop -noise False -n_motors 3 -weights [30,1,3.47e+6,0.001,3.04e+6] -time_limit 20 -search_bounds [[1,-30,1,1,-30,1,1,-30,1],[150,30,25,150,30,25,150,30,25]] -n_actions [[1,1,1],[1,1,1],[1,1,1]] -alpha 0.0001 -beta 0.0001 -epsilon 0.01 -batch_size 128 -buffer_size 1000000 -hidden_layers [[8,8],[16,8,8],[16,8,8]] -optimizer Adam -update_q True -update_alpha False -start_using_actor 0 -target_entropy_scale 1 -initial_orientation s -desired_orientation r -load False -max_episodes 250 -rep test -folder TrainingPolicies/  -gpu True -thread True
+
+-control_type and -noise: from utils get_environment gets the desired environment from the Environments folder
+    * control_type will also define the beginning of the name of the folder where the data is stored
+
+-n_motors: number of motors to be used: 1 (horizontal motor), 2 (vertical motors) or 3 (all motors)
+
+-weights: the weights of the each reward for the total reward function [w_a, w_e, w_d, w_o, w_f]
+    * w_a: the weight of teh accuracy error
+    * w_e: energy cost weight
+    * w_d: duration cost weight
+    * w_o: overshoot cost weight
+    * w_f: force cost weight
+
+-time_limit: maximum time each simulation can take (not real time)
+
+-search_bounds: minimum and maximum values that the actions can take for exploration [low, high]
+    * low: minimum values of action_space
+    *high: maximum values of action_space
+
+-alpha: regulator of the step size of the update of the weights of the actor neural network
+
+-beta: regulator of the step size of the update of the weights of the critic neural networks
+
+-epsilon: regulator of the step size of the update of the temperature parameter
+
+-batch_size: the amount of data taken to update the neural networks
+
+-buffer_size: the maximum amount of data that can be stored during training
+
+-hidden_layers: the amount of neurons each hidden layer has for the actor and the critics [actor_layers, c1_layers, c2_layers]
+    * for element you can specify the amount of neurons and the number of layers by atributting a list where each element represents a layer with the number specified of neurons: [3, 4] would represent a network with 2 hidden layers with 3 neurons on the first layer and 4 on the second
+
+-optimize: the optimizer used to update the neural networks default (Adam). Options setup+:
+    * Adam: Adam optimizer
+    * RMSpropN: this RMS Propagation where N represents the value that you set for the momentum (RMSprop0 would have a momentum of 0)
+    * SGD: Stochastic Gradient Descent
+
+-update_q: defines whether or not the weights of the critic neural networks are updated
+
+-update_alpha: defines whether or not the temperature parameter of entropy is updated or not.
+
+-start_using_actor: defines after how many episodes the agent starts learning. If this value is lower than the batch size the agent only starts learning after it has stored enough data to fill the batch
+
+-target_entropy_scale: the amount of entropy desired
+
+-initial_orientation: the orientation of the motors at the start of an episode. Go to select_reset method of classes on the Environmnets folder to learn about the options.
+
+-desired_orientation: the desired_orientation of the eye. Go to select_reset method of classes on the Environmnets folder to learn about the options.
+
+-load: load training data if it exists
+
+-max_episodes: maximum episodes of training
+
+-rep: for repetition. A suffix added to the end of the training folder to distinguish different training sessions
+
+-folder: the parent folder where the folder storing all of this training data will be placed
+
+-gpu: defines whether or not the gpu is used for training if the machine has it setup
+
+-thread: use the thread to allow the user to ask for updates during training
+
+NOTE: The use of an open-loop environment doesn't make of the entropy and target networks of the soft actor-critic algorithm making it a standard actor-critic algorithm
+Here is included the very basics to run a training sessions. The code might require some fixing before it is able to run.
+
+Packages required:
+* Cython
+* gym
+* keyboard
+* numba
+* numpy
+* numpy-quaternion
+* pyglet
+* scipy
+* tensorflow
+* tensorflow-probability

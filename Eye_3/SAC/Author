@@ -1,0 +1,10 @@
+Code adapted from:
+https://github.com/philtabor/Youtube-Code-Repository/tree/master/ReinforcementLearning/PolicyGradient/SAC/tf2
+and
+https://github.com/shakti365/soft-actor-critic/blob/master/
+using
+https://doi.org/10.48550/arXiv.1812.05905
+as reference.
+
+Video with the implementation of the first version of the soft actor-critic:
+https://www.youtube.com/watch?v=YKhkTOU0l20

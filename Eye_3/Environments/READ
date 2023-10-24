@@ -1,0 +1,5 @@
+This folder contains the two environments used for training.
+They are essentially the same, CythonOpenLoopNoiseless.py is more updated and makes use of the system built with Cython to speed up simulations.
+OpenLoopNoiseless.py is commented, CythonOpenLoopNoiseless.py is only commented on the extra features.
+
+NOTE: Don't forget to build the extensions on Core_Cython to make use of the this CythonOpenLoopNoiseless.py file.
